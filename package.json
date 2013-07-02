@@ -32,7 +32,9 @@
     "lodash": "~1.2.0"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.4.3"
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-clean": "~0.4.1",
+    "node-xml2json": "~1.0.0"
   },
   "keywords": [
     "convert json",

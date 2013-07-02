@@ -21,19 +21,19 @@ module.exports = function(grunt) {
     },
 
     convert: {
-      one: {
-        src: ['test/one.xml'],
-        dest: 'test/one.json'
-      },
-      two: {
-        src: ['test/two.xml'],
-        dest: 'test/two.json'
+      xml: {
+        src: ['test/fixtures/sublime.xml'],
+        dest: 'tmp/result/sublime.json'
       }
+    },
+    clean: {
+      tmp: ['<%= convert.xml.dest %>']
     }
   });
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['jshint']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['test', 'convert']);
+  grunt.registerTask('default', ['clean', 'test', 'convert']);
 
 
 };
