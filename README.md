@@ -33,101 +33,12 @@ grunt.initConfig({
       // Target-specific file lists and/or options go here.
     }
   }
-})
+});
 ```
 
 
 ### Options
 _Documentation forthcoming_
-
-#### format
-Type: `String`
-Default: `json`
-
-Option to specify output format for dest files. Case insensitive, and may be either YAML or JSON format. Any of the following will work:
-
-* `'yml'`, `'yaml'`, `'YML'`, `'YAML'`
-* `'json'`, `'JSON'` (although these are uncessary since the task defaults to json)
-
-
-#### sorted
-Type: `Boolean`
-Default: `false`
-
-Sorts ouput objects and properties in alphabetical order.
-
-
-#### indent
-Type: `Number`
-Default: `2`
-
-Number of spaces to indent the output. Currently only works for `.json` files, not `.yml`.
-
-
-#### debug
-Type: `Boolean`
-Default: `false`
-
-When set to `true`, the output will include all omitted properties for inspection.
-
-
-
-### Usage Examples
-See some of the [example converts](https://github.com/assemble/grunt-convert/tree/master/test/actual) generated with this task.
-
-Let's say the goal is to build a `component.json` from a `package.json`. We could: 
-
- * Do a one-to-one transfer of objects and properties
- * Override any objects or properties in the options by simply adding the new value to the options. 
- * Remove any objects or properties in the options by making the value `undefined` (this is a quick fix, will revisit but it works for now.)
- * Define new objects and properties in the options block.
- 
-``` js
-convert: {
-  options: {
-    metadata: 'metadata.json', // optional source of metatdata
-    name: 'grunt-convert'
-    version: '0.1.0'           
-    description: 'Generates JSON and/or YAML convert files from given source files or directories or source files.'
-  },
-  // build component.json from package.json
-  package: {
-    files: {
-      'package.json': []
-    }
-  },
-  component: {
-    files: {
-      'component.json': []
-    }
-  }
-}
-```
-
-
-#### Default Options
-
-``` js
-convert: {
-  options: {
-    collections: true,
-    debug: false,
-    exclude: [],
-    format: 'json',
-    include: [],
-    indent: 2,
-    convertrc: [],
-    metadata: [],
-    sorted: false
-  },
-  // build component.json from package.json
-  component: {
-    files: {
-      'component.json': ['package.json']
-    }
-  }
-}
-```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Please lint and test your code using [Grunt](http://gruntjs.com/).
@@ -138,12 +49,6 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 + [http://twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)
 + [http://github.com/jonschlinkert](http://github.com/jonschlinkert)
-
-**Brian Woodward**
-
-+ [http://twitter.com/doowb](http://twitter.com/doowb)
-+ [http://github.com/doowb](http://github.com/doowb)
-
 
 
 ## License
