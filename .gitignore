@@ -1,0 +1,10 @@
+# Node.js
+node_modules
+npm-debug.log
+
+# Local dirs and files
+vendor
+temp
+tmp
+TODO.md
+*.sublime-*
