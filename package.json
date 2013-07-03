@@ -29,12 +29,12 @@
   },
   "dependencies": {
     "grunt": "~0.4.1",
-    "lodash": "~1.2.0"
+    "lodash": "~1.2.0",
+    "node-xml2json": "~1.0.0"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.4.3",
-    "grunt-contrib-clean": "~0.4.1",
-    "node-xml2json": "~1.0.0"
+    "grunt-contrib-clean": "~0.4.1"
   },
   "keywords": [
     "convert json",
