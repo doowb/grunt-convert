@@ -1,7 +1,7 @@
 {
   "name": "grunt-convert",
   "description": "Convert between XML, JSON and YAML, from one format to another.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/assemble/grunt-convert",
   "author": {
     "name": "Jon Schlinkert",
@@ -29,12 +29,12 @@
   },
   "dependencies": {
     "grunt": "~0.4.1",
-    "lodash": "~1.2.0"
+    "lodash": "~1.2.0",
+    "node-xml2json": "~1.0.0"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.4.3",
-    "grunt-contrib-clean": "~0.4.1",
-    "node-xml2json": "~1.0.0"
+    "grunt-contrib-clean": "~0.4.1"
   },
   "keywords": [
     "convert json",
