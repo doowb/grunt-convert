@@ -17,7 +17,9 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('convert', 'Convert XML to JSON.', function() {
 
     // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({});
+    var options = this.options({
+      pretty: 0
+    });
 
     // Iterate over all specified file groups.
     this.files.forEach(function(f) {
@@ -40,7 +42,7 @@ module.exports = function(grunt) {
           grunt.verbose.writeln(util.inspect(result, 10, null).cyan);
 
           // Stringify to JSON and write the destination file.
-          grunt.file.write(f.dest, JSON.stringify(result));
+          grunt.file.write(f.dest, JSON.stringify(result, null, options.pretty));
 
           // Print a success message.
           grunt.log.ok('File "' + f.dest + '" converted.');

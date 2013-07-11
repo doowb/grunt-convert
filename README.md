@@ -38,7 +38,14 @@ grunt.initConfig({
 
 
 ### Options
-_Documentation forthcoming_
+
+#### pretty
+Type: `int`  
+Default: 0
+
+This force pretty printing.
+
+See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js#options) for available options
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Please lint and test your code using [Grunt](http://gruntjs.com/).

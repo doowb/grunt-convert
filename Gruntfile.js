@@ -26,6 +26,10 @@ module.exports = function(grunt) {
         dest: 'tmp/result/theme.json'
       },
       xmlns: {
+        options: {
+          explicitArray: false,
+          pretty: 2
+        },
         src: ['test/fixtures/repository.xml'],
         dest: 'tmp/result/repository.json'
       }
