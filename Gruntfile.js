@@ -21,21 +21,31 @@ module.exports = function(grunt) {
     },
 
     convert: {
-      xml: {
-        src: ['test/fixtures/theme.xml'],
-        dest: 'tmp/result/theme.json'
+      json: {
+        files: [
+          {
+            expand: true,     // Enable dynamic expansion.
+            cwd: 'test/fixtures/',      // Src matches are relative to this path.
+            src: ['**/*.xml'], // Actual pattern(s) to match.
+            dest: 'tmp/result/',   // Destination path prefix.
+            ext: '.json',
+          },
+        ],
       },
-      xmlns: {
-        options: {
-          explicitArray: false,
-          pretty: 2
-        },
-        src: ['test/fixtures/repository.xml'],
-        dest: 'tmp/result/repository.json'
-      }
+      yml: {
+        files: [
+          {
+            expand: true,     // Enable dynamic expansion.
+            cwd: 'test/fixtures/',      // Src matches are relative to this path.
+            src: ['**/*.xml'], // Actual pattern(s) to match.
+            dest: 'tmp/result/',   // Destination path prefix.
+            ext: '.yml',
+          },
+        ],
+      },
     },
     clean: {
-      tmp: ['<%= convert.xml.dest %>', '<%= convert.xmlns.dest %>']
+      tmp: ['tmp/result/*.{json,yml}']
     }
   });
 
