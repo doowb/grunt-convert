@@ -30,7 +30,7 @@
   "dependencies": {
     "grunt": "~0.4.1",
     "lodash": "~1.2.0",
-    "node-xml2json": "~1.0.0"
+    "xml2js": "~0.2.8"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.4.3",

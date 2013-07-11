@@ -22,12 +22,16 @@ module.exports = function(grunt) {
 
     convert: {
       xml: {
-        src: ['test/fixtures/sublime.xml'],
-        dest: 'tmp/result/sublime.json'
+        src: ['test/fixtures/theme.xml'],
+        dest: 'tmp/result/theme.json'
+      },
+      xmlns: {
+        src: ['test/fixtures/repository.xml'],
+        dest: 'tmp/result/repository.json'
       }
     },
     clean: {
-      tmp: ['<%= convert.xml.dest %>']
+      tmp: ['<%= convert.xml.dest %>', '<%= convert.xmlns.dest %>']
     }
   });
 
