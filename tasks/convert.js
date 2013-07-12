@@ -37,32 +37,46 @@ module.exports = function(grunt) {
           return true;
         }
       }).map(grunt.file.read).join(grunt.util.normalizelf(grunt.util.linefeed)); // Read source files.
-      
-      parse(srcFiles, function (err, result) {
-        if (err) {
-          grunt.log.writeln("error:"+err);
-          grunt.log.warn('Destination not written because file was empty.');
-        } else {
-          grunt.verbose.writeln(util.inspect(result, 10, null).cyan);
 
-          // Stringify to JSON
-          var data = JSON.stringify(result, null, options.pretty);
+      if (f.src.length < 1) {
+        // No src files, issued warn and goto next target.
+        grunt.log.warn('Destination not written because no source files were found.');
+        return;
+      }
 
-          // Check format and write the destination file.
-          var type = f.dest.split('.').pop();
+      var srcType = f.src[0].split('.').pop();
 
-          if (type === 'yml') {
-            var yaml = YAML.stringify(JSON.parse(data), options.yml.inline, options.yml.spaces);
-            grunt.file.write(f.dest, yaml);
-          } else {
-            grunt.file.write(f.dest, data);
-          }
-
-          // Print a success message.
-          grunt.log.ok('File "' + f.dest + '" converted.');
-        }
-      });
+      console.log(util.inspect(srcType, 10, null).cyan);
+      convert(srcFiles, f, options);
       
     });
   });
+
+  var convert = function(source, file, options) {
+    return parse(source, function (err, result) {
+      if (err) {
+        grunt.log.writeln("error:"+err);
+        grunt.log.warn('Destination not written because file was empty.');
+      } else {
+        grunt.verbose.writeln(util.inspect(result, 10, null).cyan);
+
+        // Stringify to JSON
+        var data = JSON.stringify(result, null, options.pretty);
+
+        // Check destination format and write to destination file.
+        var type = file.dest.split('.').pop();
+
+        if (type === 'yml') {
+          var yaml = YAML.stringify(JSON.parse(data), options.yml.inline, options.yml.spaces);
+          grunt.file.write(file.dest, yaml);
+        } else {
+          grunt.file.write(file.dest, data);
+        }
+
+        // Print a success message.
+        grunt.log.ok('File "' + file.dest + '" converted.');
+      }
+    });
+  };
+
 };
