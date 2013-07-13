@@ -19,8 +19,10 @@ module.exports = function(grunt) {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       inline: 2,
-      space: 0
+      spaces: 2
     });
+
+    grunt.verbose.writeln(util.inspect(options, 10, null).cyan);
 
     // Iterate over all specified file groups.
     this.files.forEach(function(f) {
@@ -46,7 +48,7 @@ module.exports = function(grunt) {
 
       if(srcType === 'yml') {
 
-        var json = JSON.stringify(YAML.load(f.src[0]), options.inline, options.spaces);
+        var json = JSON.stringify(YAML.load(f.src[0]), null, options.spaces);
         saveFile(f, json);
 
       }  else if (srcType === 'json') {
@@ -77,7 +79,7 @@ module.exports = function(grunt) {
   });
 
   var saveFile = function(file, data) {
-    grunt.verbose.writeln(util.inspect(data, 10, null).cyan);
+    //grunt.verbose.writeln(util.inspect(data, 10, null).cyan);
     grunt.file.write(file.dest, data);
     grunt.log.ok('File "' + file.dest + '" converted.');
   };
