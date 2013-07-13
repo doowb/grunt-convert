@@ -41,6 +41,17 @@ module.exports = function(grunt) {
           },
         ],
       },
+      json2yml: {
+        files: [
+          {
+            expand: true,          
+            cwd: 'test/fixtures/',
+            src: ['**/*.json'],
+            dest: 'tmp/result/',
+            ext: '.yml',
+          },
+        ],
+      },
       xml2json: {
         files: [
           {
