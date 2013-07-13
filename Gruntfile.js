@@ -29,28 +29,36 @@ module.exports = function(grunt) {
         src: ['test/fixtures/simple.xml'],
         dest: 'tmp/result/simple.json'
       },
+
       yml2json: {
-        src: ['test/fixtures/yml2json.yml'],
-        dest: 'tmp/result/yml2json.json'
-      },
-      json: {
         files: [
           {
-            expand: true,     // Enable dynamic expansion.
-            cwd: 'test/fixtures/',      // Src matches are relative to this path.
-            src: ['**/*.xml'], // Actual pattern(s) to match.
-            dest: 'tmp/result/',   // Destination path prefix.
+            expand: true,           // Enable dynamic expansion.
+            cwd: 'test/fixtures/',  // Src matches are relative to this path.
+            src: ['**/*.yml'],      // Actual pattern(s) to match.
+            dest: 'tmp/result/',    // Destination path prefix.
             ext: '.json',
           },
         ],
       },
-      yml: {
+      xml2json: {
         files: [
           {
-            expand: true,     // Enable dynamic expansion.
-            cwd: 'test/fixtures/',      // Src matches are relative to this path.
-            src: ['**/*.xml'], // Actual pattern(s) to match.
-            dest: 'tmp/result/',   // Destination path prefix.
+            expand: true,
+            cwd: 'test/fixtures/',
+            src: ['**/*.xml'],
+            dest: 'tmp/result/',
+            ext: '.json',
+          },
+        ],
+      },
+      xml2yml: {
+        files: [
+          {
+            expand: true,     
+            cwd: 'test/fixtures/',      
+            src: ['**/*.xml'], 
+            dest: 'tmp/result/',  
             ext: '.yml',
           },
         ],

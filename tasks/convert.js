@@ -56,7 +56,21 @@ module.exports = function(grunt) {
 
       } else if (srcType === 'xml') {
 
-        xml2jsonyml(srcFiles, f, options);
+        // Check destination format and write to destination file.
+        var destType = f.dest.split('.').pop();
+
+        return parse(srcFiles, function (err, result) {
+
+          // Stringify to JSON
+          var data = JSON.stringify(result, null, options.spaces);
+
+          if (destType === 'yml') {
+            data = YAML.stringify(JSON.parse(data), options.inline, options.spaces);
+          }
+
+          saveFile(f, data);
+
+        });
 
       }
     });
@@ -67,30 +81,4 @@ module.exports = function(grunt) {
     grunt.file.write(file.dest, data);
     grunt.log.ok('File "' + file.dest + '" converted.');
   };
-
-  var xml2jsonyml = function(source, file, options) {
-
-    // Check destination format and write to destination file.
-    var type = file.dest.split('.').pop();
-
-    return parse(source, function (err, result) {
-
-      grunt.verbose.writeln(util.inspect(result, 10, null).cyan);
-
-      // Stringify to JSON
-      var data = JSON.stringify(result, null, options.spaces);
-
-      if (type === 'yml') {
-        var yaml = YAML.stringify(JSON.parse(data), options.inline, options.spaces);
-        grunt.file.write(file.dest, yaml);
-      } else {
-        grunt.file.write(file.dest, data);
-      }
-
-      // Print a success message.
-      grunt.log.ok('File "' + file.dest + '" converted.');
-
-    });
-  };
-
 };
