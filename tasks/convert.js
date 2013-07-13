@@ -18,11 +18,8 @@ module.exports = function(grunt) {
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      pretty: 0,
-      yml: {
-        inline: 2,
-        space: 2
-      }
+      inline: 2,
+      space: 0
     });
 
     // Iterate over all specified file groups.
@@ -44,38 +41,55 @@ module.exports = function(grunt) {
         return;
       }
 
+      // Check source format
       var srcType = f.src[0].split('.').pop();
 
-      console.log(util.inspect(srcType, 10, null).cyan);
-      convert(srcFiles, f, options);
-      
+      if(srcType === 'yml') {
+
+        var json = JSON.stringify(YAML.load(f.src[0]), options.inline, options.spaces);
+        saveFile(f, json);
+
+      }  else if (srcType === 'json') {
+
+        var yaml = YAML.stringify(JSON.parse(srcFiles), options.inline, options.spaces);
+        saveFile(f, yaml);
+
+      } else if (srcType === 'xml') {
+
+        xml2jsonyml(srcFiles, f, options);
+
+      }
     });
   });
 
-  var convert = function(source, file, options) {
+  var saveFile = function(file, data) {
+    grunt.verbose.writeln(util.inspect(data, 10, null).cyan);
+    grunt.file.write(file.dest, data);
+    grunt.log.ok('File "' + file.dest + '" converted.');
+  };
+
+  var xml2jsonyml = function(source, file, options) {
+
+    // Check destination format and write to destination file.
+    var type = file.dest.split('.').pop();
+
     return parse(source, function (err, result) {
-      if (err) {
-        grunt.log.writeln("error:"+err);
-        grunt.log.warn('Destination not written because file was empty.');
+
+      grunt.verbose.writeln(util.inspect(result, 10, null).cyan);
+
+      // Stringify to JSON
+      var data = JSON.stringify(result, null, options.spaces);
+
+      if (type === 'yml') {
+        var yaml = YAML.stringify(JSON.parse(data), options.inline, options.spaces);
+        grunt.file.write(file.dest, yaml);
       } else {
-        grunt.verbose.writeln(util.inspect(result, 10, null).cyan);
-
-        // Stringify to JSON
-        var data = JSON.stringify(result, null, options.pretty);
-
-        // Check destination format and write to destination file.
-        var type = file.dest.split('.').pop();
-
-        if (type === 'yml') {
-          var yaml = YAML.stringify(JSON.parse(data), options.yml.inline, options.yml.spaces);
-          grunt.file.write(file.dest, yaml);
-        } else {
-          grunt.file.write(file.dest, data);
-        }
-
-        // Print a success message.
-        grunt.log.ok('File "' + file.dest + '" converted.');
+        grunt.file.write(file.dest, data);
       }
+
+      // Print a success message.
+      grunt.log.ok('File "' + file.dest + '" converted.');
+
     });
   };
 
