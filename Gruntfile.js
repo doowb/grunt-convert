@@ -21,13 +21,64 @@ module.exports = function(grunt) {
     },
 
     convert: {
-      xml: {
-        src: ['test/fixtures/sublime.xml'],
-        dest: 'tmp/result/sublime.json'
-      }
+      notfound: {
+        src: ['test/fixtures/notfound.xml'],
+        dest: 'tmp/result/notfound.json'
+      },
+      simple: {
+        options: {
+          spaces: 8
+        },
+        src: ['test/fixtures/simple.xml'],
+        dest: 'tmp/result/simple.json'
+      },
+      yml2json: {
+        files: [
+          {
+            expand: true,           // Enable dynamic expansion.
+            cwd: 'test/fixtures/',  // Src matches are relative to this path.
+            src: ['**/*.yml'],      // Actual pattern(s) to match.
+            dest: 'tmp/result/',    // Destination path prefix.
+            ext: '.json',
+          },
+        ],
+      },
+      json2yml: {
+        files: [
+          {
+            expand: true,          
+            cwd: 'test/fixtures/',
+            src: ['**/*.json'],
+            dest: 'tmp/result/',
+            ext: '.yml',
+          },
+        ],
+      },
+      xml2json: {
+        files: [
+          {
+            expand: true,
+            cwd: 'test/fixtures/',
+            src: ['**/*.xml'],
+            dest: 'tmp/result/',
+            ext: '.json',
+          },
+        ],
+      },
+      xml2yml: {
+        files: [
+          {
+            expand: true,     
+            cwd: 'test/fixtures/',      
+            src: ['**/*.xml'], 
+            dest: 'tmp/result/',  
+            ext: '.yml',
+          },
+        ],
+      },
     },
     clean: {
-      tmp: ['<%= convert.xml.dest %>']
+      tmp: ['tmp/result/*.{json,yml}']
     }
   });
 
