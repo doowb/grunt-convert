@@ -39,20 +39,20 @@ module.exports = function(grunt) {
             cwd: 'test/fixtures/',  // Src matches are relative to this path.
             src: ['**/*.yml'],      // Actual pattern(s) to match.
             dest: 'tmp/result/',    // Destination path prefix.
-            ext: '.json',
-          },
-        ],
+            ext: '.json'
+          }
+        ]
       },
       json2yml: {
         files: [
           {
-            expand: true,          
+            expand: true,
             cwd: 'test/fixtures/',
             src: ['**/*.json'],
             dest: 'tmp/result/',
-            ext: '.yml',
-          },
-        ],
+            ext: '.yml'
+          }
+        ]
       },
       xml2json: {
         files: [
@@ -61,21 +61,21 @@ module.exports = function(grunt) {
             cwd: 'test/fixtures/',
             src: ['**/*.xml'],
             dest: 'tmp/result/',
-            ext: '.json',
-          },
-        ],
+            ext: '.json'
+          }
+        ]
       },
       xml2yml: {
         files: [
           {
-            expand: true,     
-            cwd: 'test/fixtures/',      
-            src: ['**/*.xml'], 
-            dest: 'tmp/result/',  
-            ext: '.yml',
-          },
-        ],
-      },
+            expand: true,
+            cwd: 'test/fixtures/',
+            src: ['**/*.xml'],
+            dest: 'tmp/result/',
+            ext: '.yml'
+          }
+        ]
+      }
     },
     clean: {
       tmp: ['tmp/result/*.{json,yml}']
