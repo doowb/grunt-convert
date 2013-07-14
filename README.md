@@ -38,7 +38,20 @@ grunt.initConfig({
 
 
 ### Options
-_Documentation forthcoming_
+
+#### spaces
+Type: `int`  
+Default: 2
+
+This force pretty printing for JSON and YAML.
+
+#### inline
+Type: `int`  
+Default: 2
+
+This force pretty printing for YAML only.
+
+See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js#options) for available options
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Please lint and test your code using [Grunt](http://gruntjs.com/).

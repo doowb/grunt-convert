@@ -10,17 +10,23 @@
 
 module.exports = function(grunt) {
 
-  var util     = require('util');
-  var xml2json = require('node-xml2json');
-
+  var util = require('util');
+  var parse = require('xml2js').parseString;
+  var YAML = require('yamljs');
  
   grunt.registerMultiTask('convert', 'Convert XML to JSON.', function() {
 
     // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({});
+    var options = this.options({
+      inline: 2,
+      spaces: 2
+    });
+
+    grunt.verbose.writeln(util.inspect(options, 10, null).cyan);
 
     // Iterate over all specified file groups.
     this.files.forEach(function(f) {
+
       var srcFiles = f.src.filter(function(filepath) {
         // Verify that files exist. Warn if a source file/pattern was invalid.
         if (!grunt.file.exists(filepath)) {
@@ -31,29 +37,44 @@ module.exports = function(grunt) {
         }
       }).map(grunt.file.read).join(grunt.util.normalizelf(grunt.util.linefeed)); // Read source files.
 
-      var convertFormat = toJSON(srcFiles);
-      if (convertFormat.length < 1) {
-        grunt.log.warn('Destination not written because file was empty.');
-      } else {
-        
-        grunt.verbose.writeln(util.inspect(srcFiles, 10, null).cyan);
-        
-        // Stringify to JSON and write the destination file.
-        grunt.file.write(f.dest, JSON.stringify(convertFormat));
-
-        // Print a success message.
-        grunt.log.ok('File "' + f.dest + '" converted.');
+      if (f.src.length < 1) {
+        // No src files, issued warn and goto next target.
+        grunt.log.warn('Destination not written because no source files were found.');
+        return;
       }
-    });
-  });  
 
-  var toJSON = function(source) {
-    try {
-      // Parse given XML files
-      return xml2json.parser(source);
-    } catch (e) {
-      grunt.log.error(e);
-      grunt.fail.warn('Conversion failed.');
-    }
-  };
+      var srcType = f.src[0].split('.').pop()
+        , destType = f.dest.split('.').pop()
+        , data = srcFiles;
+
+      // source/destination same, goto next target.
+      if (srcType === destType) {
+        return;
+      }
+
+      // Convert to json type
+      if (srcType === 'xml') {
+        parse(srcFiles, function (err, result) {
+          data = JSON.stringify(result, null, options.spaces);
+        });
+      } else if (srcType === 'yml') {
+        data = JSON.stringify(YAML.load(f.src[0]), null, options.spaces);
+      }
+
+      if (destType === 'xml') {
+        grunt.log.warn('Not implement.');
+        return;
+      } else if (destType === 'yml') {
+        data = YAML.stringify(JSON.parse(data), options.inline, options.spaces);
+      }
+      
+      //grunt.verbose.writeln(util.inspect(data, 10, null).cyan);
+
+      // Write the destination file.
+      grunt.file.write(f.dest, data);
+
+      // Print a success message.
+      grunt.log.ok('File "' + f.dest + '" converted.');
+    });
+  });
 };
