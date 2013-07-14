@@ -13,13 +13,13 @@ module.exports = function(grunt) {
   var util = require('util');
   var parse = require('xml2js').parseString;
   var YAML = require('yamljs');
- 
+
   grunt.registerMultiTask('convert', 'Convert XML to JSON.', function() {
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       inline: 2,
-      spaces: 2
+      indent: 2
     });
 
     grunt.verbose.writeln(util.inspect(options, 10, null).cyan);
@@ -43,9 +43,9 @@ module.exports = function(grunt) {
         return;
       }
 
-      var srcType = f.src[0].split('.').pop()
-        , destType = f.dest.split('.').pop()
-        , data = srcFiles;
+      var srcType = f.src[0].split('.').pop(),
+          destType = f.dest.split('.').pop(),
+          data = srcFiles;
 
       // source/destination same, goto next target.
       if (srcType === destType) {
@@ -54,27 +54,27 @@ module.exports = function(grunt) {
 
       // Convert to json type
       if (srcType === 'xml') {
-        parse(srcFiles, function (err, result) {
-          data = JSON.stringify(result, null, options.spaces);
+        parse(srcFiles, function(err, result) {
+          data = JSON.stringify(result, null, options.indent);
         });
       } else if (srcType === 'yml') {
-        data = JSON.stringify(YAML.load(f.src[0]), null, options.spaces);
+        data = JSON.stringify(YAML.load(f.src[0]), null, options.indent);
       }
 
       if (destType === 'xml') {
-        grunt.log.warn('Not implement.');
+        grunt.log.warn('Converting to XML is not implemented.');
         return;
       } else if (destType === 'yml') {
-        data = YAML.stringify(JSON.parse(data), options.inline, options.spaces);
+        data = YAML.stringify(JSON.parse(data), options.inline, options.indent);
       }
-      
+
       //grunt.verbose.writeln(util.inspect(data, 10, null).cyan);
 
       // Write the destination file.
       grunt.file.write(f.dest, data);
 
       // Print a success message.
-      grunt.log.ok('File "' + f.dest + '" converted.');
+      grunt.log.ok('File "' + f.dest + '" converted.' + ' OK'.green);
     });
   });
 };

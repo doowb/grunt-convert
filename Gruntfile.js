@@ -27,7 +27,7 @@ module.exports = function(grunt) {
       },
       simple: {
         options: {
-          spaces: 8
+          indent: 8
         },
         src: ['test/fixtures/simple.xml'],
         dest: 'tmp/result/simple.json'

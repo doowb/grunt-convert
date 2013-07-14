@@ -2,7 +2,6 @@
 
 > Convert between XML, JSON and YAML, from one format to another.
 
-
 ## Getting Started
 This plugin requires Grunt `~0.4.0`
 
@@ -39,19 +38,19 @@ grunt.initConfig({
 
 ### Options
 
-#### spaces
-Type: `int`  
+#### indent
+Type: `int`
 Default: 2
 
-This force pretty printing for JSON and YAML.
+Force indentatation ("pretty printing") for JSON and YAML.
 
 #### inline
-Type: `int`  
+Type: `int`
 Default: 2
 
-This force pretty printing for YAML only.
+Force indentatation ("pretty printing")  for YAML only.
 
-See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js#options) for available options
+See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js#options) for other available options
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Please lint and test your code using [Grunt](http://gruntjs.com/).
