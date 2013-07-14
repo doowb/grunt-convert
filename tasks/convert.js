@@ -18,6 +18,7 @@ module.exports = function(grunt) {
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
+      mergeAttrs: true,
       inline: 2,
       indent: 2
     });
@@ -54,7 +55,7 @@ module.exports = function(grunt) {
 
       // Convert to json type
       if (srcType === 'xml') {
-        parse(srcFiles, function(err, result) {
+        parse(srcFiles, options, function(err, result) {
           data = JSON.stringify(result, null, options.indent);
         });
       } else if (srcType === 'yml') {

@@ -67,5 +67,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 [MIT License](LICENSE-MIT)
 
 ## Release History
-* 2013-07-02    v0.1.2    Add support YAML. Added XML to JSON/YAML, JSON toYAML, and YAML to JSON.
+* 2013-07-15    v0.1.2    Add support YAML. Added XML to JSON/YAML, JSON toYAML, and YAML to JSON.
 * 2013-07-02    v0.1.1    XML to JSON.
