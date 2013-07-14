@@ -32,7 +32,6 @@ module.exports = function(grunt) {
         src: ['test/fixtures/simple.xml'],
         dest: 'tmp/result/simple.json'
       },
-
       yml2json: {
         files: [
           {

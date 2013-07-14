@@ -43,44 +43,38 @@ module.exports = function(grunt) {
         return;
       }
 
-      // Check source format
-      var srcType = f.src[0].split('.').pop();
+      var srcType = f.src[0].split('.').pop()
+        , destType = f.dest.split('.').pop()
+        , data = srcFiles;
 
-      if(srcType === 'yml') {
-
-        var json = JSON.stringify(YAML.load(f.src[0]), null, options.spaces);
-        saveFile(f, json);
-
-      }  else if (srcType === 'json') {
-
-        var yaml = YAML.stringify(JSON.parse(srcFiles), options.inline, options.spaces);
-        saveFile(f, yaml);
-
-      } else if (srcType === 'xml') {
-
-        // Check destination format and write to destination file.
-        var destType = f.dest.split('.').pop();
-
-        return parse(srcFiles, function (err, result) {
-
-          // Stringify to JSON
-          var data = JSON.stringify(result, null, options.spaces);
-
-          if (destType === 'yml') {
-            data = YAML.stringify(JSON.parse(data), options.inline, options.spaces);
-          }
-
-          saveFile(f, data);
-
-        });
-
+      // source/destination same, goto next target.
+      if (srcType === destType) {
+        return;
       }
+
+      // Convert to json type
+      if (srcType === 'xml') {
+        parse(srcFiles, function (err, result) {
+          data = JSON.stringify(result, null, options.spaces);
+        });
+      } else if (srcType === 'yml') {
+        data = JSON.stringify(YAML.load(f.src[0]), null, options.spaces);
+      }
+
+      if (destType === 'xml') {
+        grunt.log.warn('Not implement.');
+        return;
+      } else if (destType === 'yml') {
+        data = YAML.stringify(JSON.parse(data), options.inline, options.spaces);
+      }
+      
+      //grunt.verbose.writeln(util.inspect(data, 10, null).cyan);
+
+      // Write the destination file.
+      grunt.file.write(f.dest, data);
+
+      // Print a success message.
+      grunt.log.ok('File "' + f.dest + '" converted.');
     });
   });
-
-  var saveFile = function(file, data) {
-    //grunt.verbose.writeln(util.inspect(data, 10, null).cyan);
-    grunt.file.write(file.dest, data);
-    grunt.log.ok('File "' + file.dest + '" converted.');
-  };
 };
