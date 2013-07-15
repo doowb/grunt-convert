@@ -62,14 +62,19 @@ module.exports = function(grunt) {
         data = JSON.stringify(YAML.load(f.src[0]), null, options.indent);
       }
 
+      // Check destonation type
       if (destType === 'xml') {
-        grunt.log.warn('Converting to XML is not implemented.');
-        return;
+        // Parse to object and convert to destination
+        data = toXML(JSON.parse(data), options.header);
+        // TODO: Beutify 
+        //if (options.beutify) {
+        //  data = beautify(data, options.indent);
+        //}
       } else if (destType === 'yml') {
         data = YAML.stringify(JSON.parse(data), options.inline, options.indent);
       }
 
-      //grunt.verbose.writeln(util.inspect(data, 10, null).cyan);
+      grunt.verbose.writeln(util.inspect(options, 10, null).cyan);
 
       // Write the destination file.
       grunt.file.write(f.dest, data);
@@ -78,4 +83,57 @@ module.exports = function(grunt) {
       grunt.log.ok('File "' + f.dest + '" converted.' + ' OK'.green);
     });
   });
+  
+  // TODO: Beutify
+  var toXML = function xml(json, options) {
+
+    var XML_CHARACTER_MAP = {
+      '&': '&amp;',
+      '"': '&quot;',
+       "'": '&apos;',
+      '<': '&lt;',
+      '>': '&gt;'
+    };
+    
+    var result = options.header ? '<?xml version="1.0" encoding="UTF-8"?>' : '';
+
+    var type = json.constructor.name;
+    options.header = false;
+
+    if(type==='Array'){
+      json.forEach(function(node){
+        result += xml(node, options);
+      });
+
+    } else if(type ==='Object' && typeof json === "object") {
+
+      Object.keys(json).forEach(function(key){
+        if(key!==options.attrkey){
+          var node = json[key],
+          attributes = '';
+
+          if(options.attrkey && json[options.attrkey]){
+            Object.keys(json[options.attrkey]).forEach(function(k){
+              attributes += util.format(' %s="%s"', k, json[options.attrkey][k]);
+            });
+          }
+          var inner = xml(node,options);
+          //console.log(inner);
+
+          if(inner){
+            result += util.format("<%s%s>%s</%s>", key, attributes, xml(node,options), key);
+          } else {
+            result += util.format("<%s%s/>", key, attributes);
+          }
+        }
+      });
+    } else {
+      return json.toString()
+      .replace(/([&"<>''])/g, function(str, item) {
+        return XML_CHARACTER_MAP[item];
+      });  
+    }
+
+    return result;
+  };
 };

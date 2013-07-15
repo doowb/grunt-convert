@@ -32,6 +32,13 @@ module.exports = function(grunt) {
         src: ['test/fixtures/simple.xml'],
         dest: 'tmp/result/simple.json'
       },
+      json2xml:{
+        options: {
+          header: true
+        },
+        src: ['test/fixtures/sublime.json'],
+        dest: 'tmp/result/sublime.xml'
+      },
       yml2json: {
         files: [
           {
