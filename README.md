@@ -69,6 +69,11 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 + [http://twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)
 + [http://github.com/jonschlinkert](http://github.com/jonschlinkert)
 
+**Hariadi Hinta**
+
++ [http://twitter.com/hariadi](http://twitter.com/hariadi)
++ [http://github.com/hariadi](http://github.com/hariadi)
+
 
 ## License
 [MIT License](LICENSE-MIT)
