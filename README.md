@@ -39,18 +39,19 @@ grunt.initConfig({
 ### Options
 
 #### indent
-Type: `int`
-Default: 2
+Type: `Int`
+Default: `2`
 
 Force indentatation ("pretty printing") for JSON and YAML.
 
 #### inline
-Type: `int`
-Default: 2
+Type: `Int`
+Default: `2`
 
 Force indentatation ("pretty printing")  for YAML only.
 
 See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js#options) for other available options
+
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Please lint and test your code using [Grunt](http://gruntjs.com/).
@@ -67,5 +68,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 [MIT License](LICENSE-MIT)
 
 ## Release History
-* 2013-07-15    v0.1.2    Add support YAML. Added XML to JSON/YAML, JSON toYAML, and YAML to JSON.
+* 2013-07-15    v0.1.2    Add support YAML. Added XML to JSON/YAML, JSON to YAML, and YAML to JSON.
 * 2013-07-02    v0.1.1    XML to JSON.
