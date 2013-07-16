@@ -1,4 +1,4 @@
-# [grunt-convert v0.1.2](http://github.com/assemble/grunt-convert) [![Build Status](https://travis-ci.org/assemble/grunt-convert.png)](https://travis-ci.org/assemble/grunt-convert)
+# [grunt-convert v0.1.3](http://github.com/assemble/grunt-convert) [![Build Status](https://travis-ci.org/assemble/grunt-convert.png)](https://travis-ci.org/assemble/grunt-convert)
 
 > Convert between XML, JSON and YAML, from one format to another.
 
@@ -39,16 +39,22 @@ grunt.initConfig({
 ### Options
 
 #### indent
-Type: `Int`
-Default: `2`
+Type: `int`
+Default: 2
 
-Force indentatation ("pretty printing") for JSON and YAML.
+Force indentation ("pretty printing") for JSON and YAML.
 
 #### inline
-Type: `Int`
-Default: `2`
+Type: `int`
+Default: 2
 
-Force indentatation ("pretty printing")  for YAML only.
+Force indentation ("pretty printing")  for YAML only.
+
+#### header
+Type: `boolean`
+Default: false
+
+Use when converting JSON/YAML to XML. Add XML tag header.
 
 See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js#options) for other available options
 
@@ -68,5 +74,6 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 [MIT License](LICENSE-MIT)
 
 ## Release History
-* 2013-07-15    v0.1.2    Add support YAML. Added XML to JSON/YAML, JSON to YAML, and YAML to JSON.
+* 2013-07-16    v0.1.3    JSON/YAML to XML.
+* 2013-07-15    v0.1.2    Add support YAML. Added XML to JSON/YAML, JSON toYAML, and YAML to JSON.
 * 2013-07-02    v0.1.1    XML to JSON.
