@@ -18,6 +18,7 @@ module.exports = function(grunt) {
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
+      pretty: true,
       mergeAttrs: true,
       inline: 2,
       indent: 2
@@ -62,14 +63,12 @@ module.exports = function(grunt) {
         data = JSON.stringify(YAML.load(f.src[0]), null, options.indent);
       }
 
-      // Check destonation type
+      // Check destination type
       if (destType === 'xml') {
         // Parse to object and convert to destination
         data = toXML(JSON.parse(data), options.header);
-        // TODO: Beutify 
-        //if (options.beutify) {
-        //  data = beautify(data, options.indent);
-        //}
+        data = (options.pretty) ? require('pretty-data').pd.xml(data) : data; 
+
       } else if (destType === 'yml') {
         data = YAML.stringify(JSON.parse(data), options.inline, options.indent);
       }
@@ -83,21 +82,19 @@ module.exports = function(grunt) {
       grunt.log.ok('File "' + f.dest + '" converted.' + ' OK'.green);
     });
   });
-  
-  // TODO: Beutify
+
   var toXML = function xml(json, options) {
 
     var XML_CHARACTER_MAP = {
-      '&': '&amp;',
-      '"': '&quot;',
-       "'": '&apos;',
-      '<': '&lt;',
-      '>': '&gt;'
-    };
+          '&': '&amp;',
+          '"': '&quot;',
+           "'": '&apos;',
+          '<': '&lt;',
+          '>': '&gt;'
+        },
+        result = options.header ? '<?xml version="1.0" encoding="UTF-8"?>' : '',
+        type = json.constructor.name;
     
-    var result = options.header ? '<?xml version="1.0" encoding="UTF-8"?>' : '';
-
-    var type = json.constructor.name;
     options.header = false;
 
     if(type==='Array'){
@@ -118,7 +115,6 @@ module.exports = function(grunt) {
             });
           }
           var inner = xml(node,options);
-          //console.log(inner);
 
           if(inner){
             result += util.format("<%s%s>%s</%s>", key, attributes, xml(node,options), key);
