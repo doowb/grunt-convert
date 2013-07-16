@@ -32,6 +32,16 @@ module.exports = function(grunt) {
         src: ['test/fixtures/simple.xml'],
         dest: 'tmp/result/simple.json'
       },
+      adv: {
+        options: {
+          mergeAttrs: true,
+          explicitArray: false,
+          indent: 2,
+          inline: 8
+        },
+        src: ['test/fixtures/theme.xml'],
+        dest: 'tmp/result/theme-adv.yml'
+      },
       json2xml:{
         options: {
           header: true
