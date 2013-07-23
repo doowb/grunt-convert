@@ -18,22 +18,9 @@ grunt.loadNpmTasks('grunt-convert');
 ```
 
 ## The "convert" task
+_Run this task with the `grunt convert` command._
 
-### Overview
-In your project's Gruntfile, add a section named `convert` to the data object passed into `grunt.initConfig()`.
-
-```js
-grunt.initConfig({
-  convert: {
-    options: {
-      // Task-specific options go here.
-    },
-    yourtarget: {
-      // Target-specific file lists and/or options go here.
-    }
-  }
-});
-```
+Task targets, files and options may be specified according to the Grunt [Configuring tasks](http://gruntjs.com/configuring-tasks) guide.
 
 
 ### Options
@@ -58,6 +45,22 @@ Use when converting JSON/YAML to XML. Add XML tag header.
 
 See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js#options) for other available options
 
+### Usage Examples
+In this example, running `grunt convert:xml2yml` (or `grunt convert` because `convert` is a [multi task](http://gruntjs.com/creating-tasks#multi-tasks)) will convert the `convert.xml` source files and writing the output to `dist/convert.yml`.
+
+```js
+grunt.initConfig({
+  convert: {
+    options: {
+      explicitArray: false,
+    },
+    xml2yml: {
+      src: ['convert.xml'],
+      dest: 'dist/convert.yml'
+    }
+  }
+});
+```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Please lint and test your code using [Grunt](http://gruntjs.com/).
