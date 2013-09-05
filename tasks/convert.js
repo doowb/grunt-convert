@@ -5,39 +5,34 @@
  * Copyright (c) 2013 Jon Schlinkert
  * Licensed under the MIT license.
  */
-
 'use strict';
 
-module.exports = function(grunt) {
+ module.exports = function(grunt) {
 
+  var fs = require('fs');
+  var path = require('path');
   var util = require('util');
-  var parse = require('xml2js').parseString;
   var YAML = require('yamljs');
 
-  grunt.registerMultiTask('convert', 'Convert XML to JSON.', function() {
+  grunt.registerMultiTask('convert', 'Build the i18n dictionaries from the csv file', function() {
 
-    // Merge task-specific and/or target-specific options with these defaults.
+    //Tell grunt that this is an async task
+    var done = this.async();
+
     var options = this.options({
       pretty: true,
       mergeAttrs: true,
       inline: 8,
-      indent: 2
+      indent: 2,
+      csv: {
+        columns: true,
+        delimeter: ','
+      }
     });
 
-    grunt.verbose.writeln(util.inspect(options, 10, null).cyan);
+    grunt.verbose.writeflags(options, 'Options');
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-
-      var srcFiles = f.src.filter(function(filepath) {
-        // Verify that files exist. Warn if a source file/pattern was invalid.
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
-      }).map(grunt.file.read).join(grunt.util.normalizelf(grunt.util.linefeed)); // Read source files.
+    grunt.util.async.forEach(this.files, function (f, next) {
 
       if (f.src.length < 1) {
         // No src files, issued warn and goto next target.
@@ -45,91 +40,113 @@ module.exports = function(grunt) {
         return;
       }
 
-      var srcType = f.src[0].split('.').pop(),
-          destType = f.dest.split('.').pop(),
+      var srcFiles = f.src.map(grunt.file.read).join(grunt.util.normalizelf(grunt.util.linefeed)),
+          srcExt = path.extname(f.src[0]),
+          destExt = path.extname(f.dest),
           data = srcFiles;
 
       // source/destination same, goto next target.
-      if (srcType === destType) {
+      if (srcExt === destExt) {
         return;
       }
+      
+      if (srcExt === '.csv') {
 
-      // Convert to json type
-      if (srcType === 'xml') {
+        var csv = require('csv');
+        csv()
+          .from(srcFiles, { 
+            columns: options.csv.columns, 
+            delimeter: options.csv.delimeter
+          }).to.array( function( row ) {
+            data = JSON.stringify(row, null, options.indent);
+            //console.log(data);
+            grunt.file.write(f.dest, data);
+            return;
+        });
+        next();
+
+      } else if (srcExt === 'xml') {
+
+        var parse = require('xml2js').parseString;
         parse(srcFiles, options, function(err, result) {
           data = JSON.stringify(result, null, options.indent);
         });
-      } else if (srcType === 'yml') {
+
+      } else if (srcExt === 'yml') {
+
         data = JSON.stringify(YAML.load(f.src[0]), null, options.indent);
+
       }
 
       // Check destination type
-      if (destType === 'xml') {
+      if (destExt === 'xml') {
         // Parse to object and convert to destination
         data = toXML(JSON.parse(data), options.header);
         data = (options.pretty) ? require('pretty-data').pd.xml(data) : data; 
 
-      } else if (destType === 'yml') {
-        data = YAML.stringify(JSON.parse(data), options.inline, options.indent);
-      }
+      } else if (destExt === 'yml') {
 
-      grunt.verbose.writeln(util.inspect(options, 10, null).cyan);
+        data = YAML.stringify(JSON.parse(data), options.inline, options.indent);
+
+      }
 
       // Write the destination file.
       grunt.file.write(f.dest, data);
 
       // Print a success message.
       grunt.log.ok('File "' + f.dest + '" converted.' + ' OK'.green);
-    });
+
+      next();    
+    }, this.async());
   });
 
   var toXML = function xml(json, options) {
 
-    var XML_CHARACTER_MAP = {
-          '&': '&amp;',
-          '"': '&quot;',
-           "'": '&apos;',
-          '<': '&lt;',
-          '>': '&gt;'
-        },
-        result = options.header ? '<?xml version="1.0" encoding="UTF-8"?>' : '',
-        type = json.constructor.name;
-    
-    options.header = false;
+      var XML_CHARACTER_MAP = {
+            '&': '&amp;',
+            '"': '&quot;',
+             "'": '&apos;',
+            '<': '&lt;',
+            '>': '&gt;'
+          },
+          result = options.header ? '<?xml version="1.0" encoding="UTF-8"?>' : '',
+          type = json.constructor.name;
+      
+      options.header = false;
 
-    if(type==='Array'){
-      json.forEach(function(node){
-        result += xml(node, options);
-      });
+      if(type==='Array'){
+        json.forEach(function(node){
+          result += xml(node, options);
+        });
 
-    } else if(type ==='Object' && typeof json === "object") {
+      } else if(type ==='Object' && typeof json === "object") {
 
-      Object.keys(json).forEach(function(key){
-        if(key!==options.attrkey){
-          var node = json[key],
-          attributes = '';
+        Object.keys(json).forEach(function(key){
+          if(key!==options.attrkey){
+            var node = json[key],
+            attributes = '';
 
-          if(options.attrkey && json[options.attrkey]){
-            Object.keys(json[options.attrkey]).forEach(function(k){
-              attributes += util.format(' %s="%s"', k, json[options.attrkey][k]);
-            });
+            if(options.attrkey && json[options.attrkey]){
+              Object.keys(json[options.attrkey]).forEach(function(k){
+                attributes += util.format(' %s="%s"', k, json[options.attrkey][k]);
+              });
+            }
+            var inner = xml(node,options);
+
+            if(inner){
+              result += util.format("<%s%s>%s</%s>", key, attributes, xml(node,options), key);
+            } else {
+              result += util.format("<%s%s/>", key, attributes);
+            }
           }
-          var inner = xml(node,options);
+        });
+      } else {
+        return json.toString()
+        .replace(/([&"<>''])/g, function(str, item) {
+          return XML_CHARACTER_MAP[item];
+        });  
+      }
 
-          if(inner){
-            result += util.format("<%s%s>%s</%s>", key, attributes, xml(node,options), key);
-          } else {
-            result += util.format("<%s%s/>", key, attributes);
-          }
-        }
-      });
-    } else {
-      return json.toString()
-      .replace(/([&"<>''])/g, function(str, item) {
-        return XML_CHARACTER_MAP[item];
-      });  
-    }
-
-    return result;
-  };
+      return result;
+    };
 };

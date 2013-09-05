@@ -19,12 +19,19 @@ module.exports = function(grunt) {
         jshintrc: '.jshintrc'
       }
     },
+    
+    i18n: {
+      csv: {
+        src: ['test/fixtures/columns.csv'],
+        dest: 'tmp/result/columns.json'
+      }
+    },
 
     convert: {
-      notfound: {
-        src: ['test/fixtures/notfound.xml'],
-        dest: 'tmp/result/notfound.json'
-      },
+      //notfound: {
+      //  src: ['test/fixtures/notfound.xml'],
+      //  dest: 'tmp/result/notfound.json'
+      //},
       simple: {
         options: {
           indent: 8
@@ -92,6 +99,10 @@ module.exports = function(grunt) {
             ext: '.yml'
           }
         ]
+      },
+      csv2json: {
+        src: ['test/fixtures/columns.csv'],
+        dest: 'tmp/result/csv.json'
       }
     },
     clean: {
