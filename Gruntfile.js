@@ -92,6 +92,10 @@ module.exports = function(grunt) {
             ext: '.yml'
           }
         ]
+      },
+      csv2json: {
+        src: ['test/fixtures/columns.csv'],
+        dest: 'tmp/result/csv.json'
       }
     },
     clean: {

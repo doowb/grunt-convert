@@ -55,7 +55,15 @@ module.exports = function(grunt) {
       }
 
       // Convert to json type
-      if (srcType === 'xml') {
+      if (srcType === 'csv') {
+        var csv = require('csv');
+
+        csv().from(data)
+        .to.array( function(data){
+          console.log(data);
+        } );
+
+      } else if (srcType === 'xml') {
         parse(srcFiles, options, function(err, result) {
           data = JSON.stringify(result, null, options.indent);
         });
