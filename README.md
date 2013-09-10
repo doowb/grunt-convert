@@ -52,8 +52,8 @@ Default: `,`
 Set the field delimiter. One character only.
 
 #### cvs.columns
-Type: `string`
-Default: `,`
+Type: `boolean`
+Default: true
 
 List of fields or true if autodiscovered in the first CSV line.
 
