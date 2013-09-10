@@ -28,10 +28,6 @@ module.exports = function(grunt) {
     },
 
     convert: {
-      //notfound: {
-      //  src: ['test/fixtures/notfound.xml'],
-      //  dest: 'tmp/result/notfound.json'
-      //},
       simple: {
         options: {
           indent: 8
