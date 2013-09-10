@@ -19,13 +19,6 @@ module.exports = function(grunt) {
         jshintrc: '.jshintrc'
       }
     },
-    
-    i18n: {
-      csv: {
-        src: ['test/fixtures/columns.csv'],
-        dest: 'tmp/result/columns.json'
-      }
-    },
 
     convert: {
       simple: {
@@ -97,8 +90,12 @@ module.exports = function(grunt) {
         ]
       },
       csv2json: {
-        src: ['test/fixtures/columns.csv'],
-        dest: 'tmp/result/csv.json'
+        src: ['test/fixtures/csv2json.csv'],
+        dest: 'tmp/result/csv2json.json'
+      },
+      json2csv: {
+        src: ['test/fixtures/json2csv.json'],
+        dest: 'tmp/result/json2csv.csv'
       }
     },
     clean: {
