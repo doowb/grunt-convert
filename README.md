@@ -45,6 +45,21 @@ Use when converting JSON/YAML to XML. Add XML tag header.
 
 See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js#options) for other available options
 
+#### cvs.delimeter
+Type: `string`
+Default: `,`
+
+Set the field delimiter. One character only.
+
+#### cvs.columns
+Type: `string`
+Default: `,`
+
+List of fields or true if autodiscovered in the first CSV line.
+
+See [node-csv](https://github.com/wdavidw/node-csv/blob/master/doc/from.md#from.options) for other available options.
+
+
 ### Usage Examples
 In this example, running `grunt convert:xml2yml` (or `grunt convert` because `convert` is a [multi task](http://gruntjs.com/creating-tasks#multi-tasks)) will convert the `convert.xml` source files and writing the output to `dist/convert.yml`.
 
