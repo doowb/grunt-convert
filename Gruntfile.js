@@ -102,7 +102,7 @@ module.exports = function(grunt) {
       }
     },
     clean: {
-      tmp: ['tmp/result/*.{json,yml}']
+      tmp: ['tmp/result/*.{json,yml,xml}']
     }
   });
 

@@ -65,26 +65,26 @@
         });
         next();
 
-      } else if (srcExt === 'xml') {
+      } else if (srcExt === '.xml') {
 
         var parse = require('xml2js').parseString;
         parse(srcFiles, options, function(err, result) {
           data = JSON.stringify(result, null, options.indent);
         });
 
-      } else if (srcExt === 'yml') {
+      } else if (srcExt === '.yml') {
 
         data = JSON.stringify(YAML.load(f.src[0]), null, options.indent);
 
       }
 
       // Check destination type
-      if (destExt === 'xml') {
+      if (destExt === '.xml') {
         // Parse to object and convert to destination
         data = toXML(JSON.parse(data), options.header);
         data = (options.pretty) ? require('pretty-data').pd.xml(data) : data; 
 
-      } else if (destExt === 'yml') {
+      } else if (destExt === '.yml') {
 
         data = YAML.stringify(JSON.parse(data), options.inline, options.indent);
 
