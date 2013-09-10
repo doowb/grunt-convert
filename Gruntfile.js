@@ -21,10 +21,6 @@ module.exports = function(grunt) {
     },
 
     convert: {
-      notfound: {
-        src: ['test/fixtures/notfound.xml'],
-        dest: 'tmp/result/notfound.json'
-      },
       simple: {
         options: {
           indent: 8
@@ -92,10 +88,24 @@ module.exports = function(grunt) {
             ext: '.yml'
           }
         ]
+      },
+      csv2json: {
+        src: ['test/fixtures/csv2json.csv'],
+        dest: 'tmp/result/csv2json.json'
+      },
+      json2csv: {
+        options: {
+          csv: {
+            header: true,
+            columns: ['id','lastname','firstname']
+          }
+        },
+        src: ['test/fixtures/json2csv.json'],
+        dest: 'tmp/result/json2csv.csv'
       }
     },
     clean: {
-      tmp: ['tmp/result/*.{json,yml}']
+      tmp: ['tmp/result/*.{json,yml,csv,xml}']
     }
   });
 
