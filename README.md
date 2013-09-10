@@ -1,4 +1,4 @@
-# [grunt-convert v0.1.3](http://github.com/assemble/grunt-convert) [![Build Status](https://travis-ci.org/assemble/grunt-convert.png)](https://travis-ci.org/assemble/grunt-convert)
+# [grunt-convert v0.1.4](http://github.com/assemble/grunt-convert) [![Build Status](https://travis-ci.org/assemble/grunt-convert.png)](https://travis-ci.org/assemble/grunt-convert)
 
 > Convert between XML, JSON and YAML, from one format to another.
 
@@ -97,6 +97,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 [MIT License](LICENSE-MIT)
 
 ## Release History
+* 2013-09-10    v0.1.4    Add support for CSV to JSON.
 * 2013-07-16    v0.1.3    JSON/YAML to XML.
 * 2013-07-15    v0.1.2    Add support YAML. Added XML to JSON/YAML, JSON to YAML, and YAML to JSON.
 * 2013-07-02    v0.1.1    XML to JSON.
