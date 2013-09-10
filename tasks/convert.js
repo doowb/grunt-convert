@@ -13,6 +13,7 @@
   var path = require('path');
   var util = require('util');
   var YAML = require('yamljs');
+  var csv = require('csv');
 
   grunt.registerMultiTask('convert', 'Build the i18n dictionaries from the csv file', function() {
 
@@ -51,40 +52,50 @@
       }
       
       if (srcExt === '.csv') {
-
-        var csv = require('csv');
-        csv()
-          .from(srcFiles, { 
-            columns: options.csv.columns, 
-            delimeter: options.csv.delimeter
-          }).to.array( function( row ) {
-            data = JSON.stringify(row, null, options.indent);
-            //console.log(data);
-            grunt.file.write(f.dest, data);
-            return;
-        });
+        
+        if (destExt === '.json') {
+          csv()
+            .from(srcFiles, options.csv)
+            .to.array( function( row ) {
+              data = JSON.stringify(row, null, options.indent);
+              grunt.file.write(f.dest, data);
+              return;
+          });
+        } else {
+          grunt.log.warn('CSV to XML or YAML converter not supported yet. Please use csv2json output to convert to XML or YAML. Sorry.');
+          return;          
+        }
         next();
 
-      } else if (srcExt === 'xml') {
+      } else if (srcExt === '.xml') {
 
         var parse = require('xml2js').parseString;
         parse(srcFiles, options, function(err, result) {
           data = JSON.stringify(result, null, options.indent);
         });
 
-      } else if (srcExt === 'yml') {
+      } else if (srcExt === '.yml') {
 
         data = JSON.stringify(YAML.load(f.src[0]), null, options.indent);
 
       }
 
       // Check destination type
-      if (destExt === 'xml') {
-        // Parse to object and convert to destination
+      if (destExt === '.csv') {
+
+        data = JSON.parse(data);
+
+        csv()
+          .from(data)
+          .to(f.dest, options.csv);
+        next();
+
+      } else if (destExt === '.xml') {
+
         data = toXML(JSON.parse(data), options.header);
         data = (options.pretty) ? require('pretty-data').pd.xml(data) : data; 
 
-      } else if (destExt === 'yml') {
+      } else if (destExt === '.yml') {
 
         data = YAML.stringify(JSON.parse(data), options.inline, options.indent);
 
@@ -94,7 +105,7 @@
       grunt.file.write(f.dest, data);
 
       // Print a success message.
-      grunt.log.ok('File "' + f.dest + '" converted.' + ' OK'.green);
+      grunt.log.ok('File ' + f.dest.cyan + ' converted.' + ' OK'.green);
 
       next();    
     }, this.async());

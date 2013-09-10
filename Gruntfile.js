@@ -94,12 +94,18 @@ module.exports = function(grunt) {
         dest: 'tmp/result/csv2json.json'
       },
       json2csv: {
+        options: {
+          csv: {
+            header: true,
+            columns: ['id','lastname','firstname']
+          }
+        },
         src: ['test/fixtures/json2csv.json'],
         dest: 'tmp/result/json2csv.csv'
       }
     },
     clean: {
-      tmp: ['tmp/result/*.{json,yml}']
+      tmp: ['tmp/result/*.{json,yml,csv}']
     }
   });
 
