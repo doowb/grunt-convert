@@ -102,6 +102,28 @@ module.exports = function(grunt) {
         },
         src: ['test/fixtures/json2csv.json'],
         dest: 'tmp/result/json2csv.csv'
+      },
+      plist2json: {
+        files: [
+          {
+            expand: true,
+            cwd: 'test/fixtures/',
+            src: ['**/*.plist'],
+            dest: 'tmp/result/',
+            ext: '.json'
+          }
+        ]
+      },
+      json2plist: {
+        files: [
+          {
+            expand: true,
+            cwd: 'test/fixtures/',
+            src: ['**/*.json'],
+            dest: 'tmp/result/',
+            ext: '.plist'
+          }
+        ]
       }
     },
     clean: {
