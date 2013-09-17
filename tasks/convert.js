@@ -9,11 +9,12 @@
 
  module.exports = function(grunt) {
 
-  var fs = require('fs');
+  var plist = require('plist');
+  var YAML = require('yamljs');
   var path = require('path');
   var util = require('util');
-  var YAML = require('yamljs');
   var csv = require('csv');
+  var fs = require('fs');
 
   grunt.registerMultiTask('convert', 'Build the i18n dictionaries from the csv file', function() {
 
@@ -78,6 +79,10 @@
 
         data = JSON.stringify(YAML.load(f.src[0]), null, options.indent);
 
+      } else if (srcExt === '.plist') {
+
+        data = JSON.stringify(plist.parseFileSync(f.src[0]), null, options.indent);
+
       }
 
       // Check destination type
@@ -98,6 +103,10 @@
       } else if (destExt === '.yml') {
 
         data = YAML.stringify(JSON.parse(data), options.inline, options.indent);
+
+      } else if (destExt === '.plist') {
+
+        data = plist.build(JSON.parse(data)).toString();
 
       }
 
