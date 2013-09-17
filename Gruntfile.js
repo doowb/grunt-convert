@@ -21,13 +21,91 @@ module.exports = function(grunt) {
     },
 
     convert: {
-      xml: {
+      simple: {
+        options: {
+          indent: 8
+        },
+        src: ['test/fixtures/simple.xml'],
+        dest: 'tmp/result/simple.json'
+      },
+      adv: {
+        options: {
+          mergeAttrs: true,
+          explicitArray: false,
+          indent: 2,
+          inline: 8
+        },
         src: ['test/fixtures/theme.xml'],
-        dest: 'tmp/result/theme.json'
+        dest: 'tmp/result/theme-adv.yml'
+      },
+      json2xml:{
+        options: {
+          header: true
+        },
+        src: ['test/fixtures/sublime.json'],
+        dest: 'tmp/result/sublime.xml'
+      },
+      yml2json: {
+        files: [
+          {
+            expand: true,           // Enable dynamic expansion.
+            cwd: 'test/fixtures/',  // Src matches are relative to this path.
+            src: ['**/*.yml'],      // Actual pattern(s) to match.
+            dest: 'tmp/result/',    // Destination path prefix.
+            ext: '.json'
+          }
+        ]
+      },
+      json2yml: {
+        files: [
+          {
+            expand: true,
+            cwd: 'test/fixtures/',
+            src: ['**/*.json'],
+            dest: 'tmp/result/',
+            ext: '.yml'
+          }
+        ]
+      },
+      xml2json: {
+        files: [
+          {
+            expand: true,
+            cwd: 'test/fixtures/',
+            src: ['**/*.xml'],
+            dest: 'tmp/result/',
+            ext: '.json'
+          }
+        ]
+      },
+      xml2yml: {
+        files: [
+          {
+            expand: true,
+            cwd: 'test/fixtures/',
+            src: ['**/*.xml'],
+            dest: 'tmp/result/',
+            ext: '.yml'
+          }
+        ]
+      },
+      csv2json: {
+        src: ['test/fixtures/csv2json.csv'],
+        dest: 'tmp/result/csv2json.json'
+      },
+      json2csv: {
+        options: {
+          csv: {
+            header: true,
+            columns: ['id','lastname','firstname']
+          }
+        },
+        src: ['test/fixtures/json2csv.json'],
+        dest: 'tmp/result/json2csv.csv'
       }
     },
     clean: {
-      tmp: ['<%= convert.xml.dest %>']
+      tmp: ['tmp/result/*.{json,yml,csv,xml}']
     }
   });
 
@@ -39,7 +117,7 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   // By default, lint and run all tests.
-  grunt.registerTask('test', ['jshint']);
+  grunt.registerTask('test', ['jshint', 'convert']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['clean', 'test', 'convert']);
