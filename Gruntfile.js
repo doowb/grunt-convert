@@ -127,7 +127,7 @@ module.exports = function(grunt) {
       }
     },
     clean: {
-      tmp: ['tmp/result/*.{json,yml,csv,xml}']
+      tmp: ['tmp/result/*.{json,yml,csv,xml,plist}']
     }
   });
 
