@@ -45,7 +45,7 @@ Use when converting JSON/YAML to XML. Add XML tag header.
 
 See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js#options) for other available options
 
-#### cvs.delimeter
+#### cvs.delimiter
 Type: `string`
 Default: `,`
 
