@@ -28,7 +28,7 @@
       indent: 2,
       csv: {
         columns: true,
-        delimeter: ','
+        delimiter: ','
       }
     });
 
@@ -97,7 +97,9 @@
 
       } else if (destExt === '.xml') {
 
-        data = toXML(JSON.parse(data), options.header);
+        options.xml.header = options.header ? options.header : options.xml.header;
+
+        data = toXML(JSON.parse(data), options.xml);
         data = (options.pretty) ? require('pretty-data').pd.xml(data) : data; 
 
       } else if (destExt === '.yml') {

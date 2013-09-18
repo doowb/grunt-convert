@@ -40,7 +40,9 @@ module.exports = function(grunt) {
       },
       json2xml:{
         options: {
-          header: true
+          xml: {
+            header: true
+          }
         },
         src: ['test/fixtures/sublime.json'],
         dest: 'tmp/result/sublime.xml'
@@ -127,7 +129,7 @@ module.exports = function(grunt) {
       }
     },
     clean: {
-      tmp: ['tmp/result/*.{json,yml,csv,xml}']
+      tmp: ['tmp/result/*.{json,yml,csv,xml,plist}']
     }
   });
 
