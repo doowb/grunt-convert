@@ -142,7 +142,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['jshint', 'convert']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['clean', 'test', 'convert']);
+  grunt.registerTask('default', ['clean', 'test']);
 
 
 };
