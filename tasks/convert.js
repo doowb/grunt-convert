@@ -28,7 +28,7 @@
       indent: 2,
       csv: {
         columns: true,
-        delimeter: ','
+        delimiter: ','
       }
     });
 
