@@ -1,0 +1,24 @@
+v0.1.5:
+  date: 2013-07-16
+  changes:
+    - Add support for JSON to CSV.
+
+v0.1.4:
+  date: 2013-07-16
+  changes:
+    - Add support for CSV to JSON.
+
+v0.1.3:
+  date: 2013-07-16
+  changes:
+    - JSON/YAML to XML.
+
+v0.1.2:
+  date: 2013-07-15
+  changes:
+    - Add support YAML. Added XML to JSON/YAML, JSON to YAML, and YAML to JSON.
+
+v0.1.1:
+  date: 2013-07-02
+  changes:
+    - XML to JSON.
