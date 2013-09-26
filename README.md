@@ -3,6 +3,7 @@
 > Convert between XML, JSON and YAML, from one format to another.
 
 ## Getting Started
+
 _If you haven't used [grunt][] before, be sure to check out the [Getting Started][] guide._
 
 From the same directory as your project's [Gruntfile][Getting Started] and [package.json][], install this plugin with the following command:
@@ -25,6 +26,7 @@ If the plugin has been installed correctly, running `grunt --help` at the comman
 
 
 ## Options
+
 ##### indent
 Type: `Int`
 Default: `2`
@@ -61,7 +63,112 @@ See [node-csv](https://github.com/wdavidw/node-csv/blob/master/doc/from.md#from.
 
 
 ## Usage Examples
-In this example, running `grunt convert:xml2yml` (or `grunt convert` because `convert` is a [multi task](http://gruntjs.com/creating-tasks#multi-tasks)) will convert the `convert.xml` source files and writing the output to `dist/convert.yml`.
+
+
+### Convert CSV to JSON
+
+```js
+grunt.initConfig({
+  convert: {
+    options: {
+      explicitArray: false,
+    },
+    csv2json: {
+      src: ['test/fixtures/csv2json.csv'],
+      dest: 'tmp/result/csv2json.json'
+    }
+  }
+});
+```
+
+
+
+### Convert JSON to XML
+
+```js
+grunt.initConfig({
+  convert: {
+    options: {
+      explicitArray: false,
+    },
+    json2xml: {
+	    options: {
+		    xml: {
+		      header: true
+		    }
+		  },
+      src: ['test/fixtures/sublime.json'],
+  		dest: 'tmp/result/sublime.xml'
+    }
+  }
+});
+```
+
+
+### Convert JSON to YAML
+
+```js
+grunt.initConfig({
+  convert: {
+    json2yml: {
+      files: [
+        {
+          expand: true,
+          cwd: 'test/fixtures/',
+          src: ['**/*.json'],
+          dest: 'tmp/result/',
+          ext: '.yml'
+        }
+      ]
+    }
+  }
+});
+```
+
+
+### Convert PLIST to JSON
+
+```js
+grunt.initConfig({
+  convert: {
+    plist2json: {
+      files: [
+        {
+          expand: true,
+          cwd: 'test/fixtures/',
+          src: ['**/*.plist'],
+          dest: 'tmp/result/',
+          ext: '.json'
+        }
+      ]
+    }
+  }
+});
+```
+
+### Convert JSON to PLIST
+
+```js
+grunt.initConfig({
+  convert: {
+    json2plist: {
+      files: [
+        {
+          expand: true,
+          cwd: 'test/fixtures/',
+          src: ['**/*.json'],
+          dest: 'tmp/result/',
+          ext: '.plist'
+        }
+      ]
+      }
+  }
+});
+```
+
+
+
+### Convert XML to YAML
 
 ```js
 grunt.initConfig({
@@ -77,9 +184,32 @@ grunt.initConfig({
 });
 ```
 
+### Convert XML to JSON
+
+```js
+grunt.initConfig({
+  convert: {
+    options: {
+      explicitArray: false,
+    },
+	xml2json: {
+		files: [
+		  {
+		    expand: true,
+		    cwd: 'test/fixtures/',
+		    src: ['**/*.xml'],
+		    dest: 'tmp/result/',
+		    ext: '.json'
+		  }
+		]
+	},
+  }
+});
+```
 
 
 ## Contributing
+
 Please see the [Contributing to Assemble](http://assemble.io/contributing) guide for information on contributing to this project.
 
 ## Authors
@@ -97,11 +227,11 @@ Please see the [Contributing to Assemble](http://assemble.io/contributing) guide
 
 ## Release History
 
- * 2013-07-16   **v0.1.5**   Add support for JSON to CSV.
- * 2013-07-16   **v0.1.4**   Add support for CSV to JSON.
- * 2013-07-16   **v0.1.3**   JSON/YAML to XML.
- * 2013-07-15   **v0.1.2**   Add support YAML. Added XML to JSON/YAML, JSON to YAML, and YAML to JSON.
- * 2013-07-02   **v0.1.1**   XML to JSON.
+ * 2013-07-16   v0.1.5   Add support for JSON to CSV.
+ * 2013-07-16   v0.1.4   Add support for CSV to JSON.
+ * 2013-07-16   v0.1.3   JSON/YAML to XML.
+ * 2013-07-15   v0.1.2   Add support YAML. Added XML to JSON/YAML, JSON to YAML, and YAML to JSON.
+ * 2013-07-02   v0.1.1   XML to JSON.
  
 
 
@@ -110,4 +240,4 @@ Please see the [Contributing to Assemble](http://assemble.io/contributing) guide
 
 ***
 
-_This file was generated on Sun Sep 22 2013 14:23:45._
+_This file was generated on Thu Sep 26 2013 18:28:49._

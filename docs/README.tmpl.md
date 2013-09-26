@@ -3,15 +3,19 @@
 > {%= description %}
 
 ## Getting Started
+
 {%= _.doc("getting-started.md") %}
 
 ## Options
+
 {%= _.doc("options.md") %}
 
 ## Usage Examples
-{%= _.doc("examples.md") %}
+
+{%= _.doc("examples-*.md") %}
 
 ## Contributing
+
 Please see the [Contributing to Assemble](http://assemble.io/contributing) guide for information on contributing to this project.
 
 ## Authors
