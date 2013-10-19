@@ -28,19 +28,19 @@ If the plugin has been installed correctly, running `grunt --help` at the comman
 ## Options
 
 ##### indent
-Type: `Int`
+Type: `Int`  
 Default: `2`
 
 Force indentation ("pretty printing") for JSON and YAML.
 
 ##### inline
-Type: `Int`
+Type: `Int`  
 Default: `8`
 
 Force indentation ("pretty printing")  for YAML only.
 
 ##### header
-Type: `boolean`
+Type: `boolean`  
 Default: false
 
 Use when converting JSON/YAML to XML. Add XML tag header.
@@ -48,13 +48,13 @@ Use when converting JSON/YAML to XML. Add XML tag header.
 See [xml2js](https://github.com/Leonidas-from-XIV/node-xml2js#options) for other available options
 
 ##### cvs.delimiter
-Type: `string`
+Type: `string`  
 Default: `,`
 
 Set the field delimiter. One character only.
 
 ##### cvs.columns
-Type: `boolean`
+Type: `boolean`  
 Default: true
 
 List of fields or true if autodiscovered in the first CSV line.
@@ -240,4 +240,4 @@ Please see the [Contributing to Assemble](http://assemble.io/contributing) guide
 
 ***
 
-_This file was generated on Thu Sep 26 2013 18:28:49._
+_This file was generated on Sat Oct 19 2013 18:40:15._
