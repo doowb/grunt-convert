@@ -240,4 +240,4 @@ Please see the [Contributing to Assemble](http://assemble.io/contributing) guide
 
 ***
 
-_This file was generated on Sat Oct 19 2013 18:40:15._
+_This file was generated on Mon Nov 11 2013 21:55:17._
