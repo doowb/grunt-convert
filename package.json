@@ -36,9 +36,9 @@
   },
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.4.3",
-    "grunt-contrib-clean": "~0.4.1",
-    "grunt-readme": "~0.1.5"
+    "grunt-contrib-jshint": "~0.7.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-readme": "~0.2.4"
   },
   "keywords": [
     "convert json",
