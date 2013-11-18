@@ -190,7 +190,7 @@ grunt.initConfig({
 grunt.initConfig({
   convert: {
     options: {
-      explicitArray: false,
+      explicitArray: false
     },
 	xml2json: {
 		files: [
