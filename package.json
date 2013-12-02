@@ -28,17 +28,17 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "xml2js": "~0.2.8",
     "yamljs": "~0.1.4",
     "pretty-data": "~0.40.0",
     "csv": "~0.3.6",
-    "plist": "~0.4.3"
+    "plist": "~0.4.3",
+    "xml2js": "~0.4.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.7.1",
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.7.2",
     "grunt-contrib-clean": "~0.5.0",
-    "grunt-readme": "~0.2.4"
+    "grunt-readme": "~0.4.1"
   },
   "keywords": [
     "convert json",
