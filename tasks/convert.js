@@ -15,6 +15,7 @@
   var util = require('util');
   var csv = require('csv');
   var fs = require('fs');
+  var async = require('async');
 
   grunt.registerMultiTask('convert', 'Build the i18n dictionaries from the csv file', function() {
 
@@ -34,7 +35,7 @@
 
     grunt.verbose.writeflags(options, 'Options');
 
-    grunt.util.async.forEach(this.files, function (f, next) {
+    async.forEach(this.files, function (f, next) {
 
       if (f.src.length < 1) {
         // No src files, issued warn and goto next target.
@@ -66,7 +67,6 @@
           grunt.log.warn('CSV to XML or YAML converter not supported yet. Please use csv2json output to convert to XML or YAML. Sorry.');
           return;          
         }
-        next();
 
       } else if (srcExt === '.xml') {
 
@@ -93,7 +93,6 @@
         csv()
           .from(data)
           .to(f.dest, options.csv);
-        next();
 
       } else if (destExt === '.xml') {
 

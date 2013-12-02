@@ -190,7 +190,7 @@ grunt.initConfig({
 grunt.initConfig({
   convert: {
     options: {
-      explicitArray: false
+      explicitArray: false,
     },
 	xml2json: {
 		files: [
@@ -224,7 +224,6 @@ Please see the [Contributing to Assemble](http://assemble.io/contributing) guide
 + [http://twitter.com/hariadi](http://twitter.com/hariadi)
 + [http://github.com/hariadi](http://github.com/hariadi)
 
-
 ## Release History
 
  * 2013-07-16   v0.1.5   Add support for JSON to CSV.
@@ -232,12 +231,10 @@ Please see the [Contributing to Assemble](http://assemble.io/contributing) guide
  * 2013-07-16   v0.1.3   JSON/YAML to XML.
  * 2013-07-15   v0.1.2   Add support YAML. Added XML to JSON/YAML, JSON to YAML, and YAML to JSON.
  * 2013-07-02   v0.1.1   XML to JSON.
- 
-
 
 ## License
 [MIT License](LICENSE-MIT)
 
 ***
 
-_This file was generated on Mon Nov 11 2013 21:55:17._
+_This file was generated on Mon Dec 02 2013 10:35:36._
