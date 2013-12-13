@@ -37,9 +37,24 @@
 
     async.forEach(this.files, function (f, next) {
 
+      var handled = false;
+      var finish = function() {
+        if(!handled) {
+          // Write the destination file.
+          grunt.file.write(f.dest, data);
+        }
+          // Print a success message.
+          grunt.log.ok('File ' + f.dest.cyan + ' converted.' + ' OK'.green);
+
+        if(!handled) {
+          next();
+        }
+      };
+
       if (f.src.length < 1) {
         // No src files, issued warn and goto next target.
         grunt.log.warn('Destination not written because no source files were found.');
+        next();
         return;
       }
 
@@ -50,18 +65,21 @@
 
       // source/destination same, goto next target.
       if (srcExt === destExt) {
+        next();
         return;
       }
       
       if (srcExt === '.csv') {
         
         if (destExt === '.json') {
+          handled = true;
           csv()
             .from(srcFiles, options.csv)
             .to.array( function( row ) {
               data = JSON.stringify(row, null, options.indent);
               grunt.file.write(f.dest, data);
-              return;
+              finish();
+              next();
           });
         } else {
           grunt.log.warn('CSV to XML or YAML converter not supported yet. Please use csv2json output to convert to XML or YAML. Sorry.');
@@ -70,9 +88,12 @@
 
       } else if (srcExt === '.xml') {
 
+        handled = true;
         var parse = require('xml2js').parseString;
         parse(srcFiles, options, function(err, result) {
           data = JSON.stringify(result, null, options.indent);
+          finish();
+          next();
         });
 
       } else if (srcExt === '.yml') {
@@ -90,9 +111,14 @@
 
         data = JSON.parse(data);
 
+        handled = true;
         csv()
           .from(data)
-          .to(f.dest, options.csv);
+          .to(f.dest, options.csv)
+          .on('end', function() {
+            finish();
+            next();
+          });
 
       } else if (destExt === '.xml') {
 
@@ -111,14 +137,9 @@
 
       }
 
-      // Write the destination file.
-      grunt.file.write(f.dest, data);
+      finish();
 
-      // Print a success message.
-      grunt.log.ok('File ' + f.dest.cyan + ' converted.' + ' OK'.green);
-
-      next();    
-    }, this.async());
+    }, done);
   });
 
   var toXML = function xml(json, options) {

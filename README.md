@@ -237,4 +237,4 @@ Please see the [Contributing to Assemble](http://assemble.io/contributing) guide
 
 ***
 
-_This file was generated on Mon Dec 02 2013 10:35:36._
+_This file was generated on Thu Dec 12 2013 22:38:12._
