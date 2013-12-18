@@ -92,6 +92,7 @@
         var parse = require('xml2js').parseString;
         parse(srcFiles, options, function(err, result) {
           data = JSON.stringify(result, null, options.indent);
+          grunt.file.write(f.dest, data);
           finish();
           next();
         });
