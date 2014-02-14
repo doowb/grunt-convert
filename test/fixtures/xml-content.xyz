@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdk:source>
+<!-- Generated at Fri Mar 30 10:43:44 2012 from ics-mr1 @ 302030 -->
+<sdk:revision>2</sdk:revision>
+<sdk:api-level>15</sdk:api-level>
+<sdk:archives>
+    <sdk:archive arch="any" os="any">
+        <sdk:size>16468746</sdk:size>
+        <sdk:checksum type="sha1">e5992a5747c9590783fbbdd700337bf0c9f6b1fa</sdk:checksum>
+        <sdk:url>sources-15_r02.zip</sdk:url>
+    </sdk:archive>
+</sdk:archives>
+<sdk:uses-license ref="android-sdk-license"/>
+</sdk:source>

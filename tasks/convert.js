@@ -53,8 +53,12 @@
         return;
       }
 
+      if (options.type) {
+        options.type = '.' + options.type;
+      }
+
       var srcFiles = f.src.map(grunt.file.read).join(grunt.util.normalizelf(grunt.util.linefeed)),
-          srcExt = path.extname(f.src[0]),
+          srcExt = options.type ||path.extname(f.src[0]),
           destExt = path.extname(f.dest),
           data = srcFiles;
 
@@ -127,7 +131,7 @@
 
         data = YAML.stringify(JSON.parse(data), options.inline, options.indent);
         grunt.file.write(f.dest, data);
-        
+
       } else if (destExt === '.plist') {
 
         data = plist.build(JSON.parse(data)).toString();
