@@ -1,3 +1,9 @@
+##### type
+Type: `String`  
+Default: `undefined`
+
+Define content when using unknown extension.
+
 #### indent
 Type: `Int`  
 Default: `2`

@@ -17,7 +17,7 @@
   var fs = require('fs');
   var async = require('async');
 
-  grunt.registerMultiTask('convert', 'Build the i18n dictionaries from the csv file', function() {
+  grunt.registerMultiTask('convert', 'Convert to or from JSON, YAML, XML, PLIST or CSV', function() {
 
     //Tell grunt that this is an async task
     var done = this.async();
@@ -42,11 +42,6 @@
         if(!handled) {
           // Write the destination file.
           grunt.file.write(f.dest, data);
-        }
-          // Print a success message.
-          grunt.log.ok('File ' + f.dest.cyan + ' converted.' + ' OK'.green);
-
-        if(!handled) {
           next();
         }
       };
@@ -58,8 +53,12 @@
         return;
       }
 
+      if (options.type) {
+        options.type = '.' + options.type;
+      }
+
       var srcFiles = f.src.map(grunt.file.read).join(grunt.util.normalizelf(grunt.util.linefeed)),
-          srcExt = path.extname(f.src[0]),
+          srcExt = options.type ||path.extname(f.src[0]),
           destExt = path.extname(f.dest),
           data = srcFiles;
 
@@ -131,6 +130,7 @@
       } else if (destExt === '.yml') {
 
         data = YAML.stringify(JSON.parse(data), options.inline, options.indent);
+        grunt.file.write(f.dest, data);
 
       } else if (destExt === '.plist') {
 
@@ -139,7 +139,8 @@
       }
 
       finish();
-
+      // Print a success message.
+      grunt.log.ok('File ' + f.dest.cyan + ' converted.' + ' OK'.green);
     }, done);
   });
 

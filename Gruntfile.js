@@ -28,6 +28,13 @@ module.exports = function(grunt) {
         src: ['test/fixtures/simple.xml'],
         dest: 'tmp/result/simple.json'
       },
+      custom_ext: {
+        options: {
+          type: 'xml'
+        },
+        src: ['test/fixtures/xml-content.xyz'],
+        dest: 'tmp/result/xml-content.json'
+      },
       adv: {
         options: {
           mergeAttrs: true,
