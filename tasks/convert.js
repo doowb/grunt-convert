@@ -42,11 +42,6 @@
         if(!handled) {
           // Write the destination file.
           grunt.file.write(f.dest, data);
-        }
-          // Print a success message.
-          grunt.log.ok('File ' + f.dest.cyan + ' converted.' + ' OK'.green);
-
-        if(!handled) {
           next();
         }
       };
@@ -131,7 +126,8 @@
       } else if (destExt === '.yml') {
 
         data = YAML.stringify(JSON.parse(data), options.inline, options.indent);
-
+        grunt.file.write(f.dest, data);
+        
       } else if (destExt === '.plist') {
 
         data = plist.build(JSON.parse(data)).toString();
@@ -139,7 +135,8 @@
       }
 
       finish();
-
+      // Print a success message.
+      grunt.log.ok('File ' + f.dest.cyan + ' converted.' + ' OK'.green);
     }, done);
   });
 
