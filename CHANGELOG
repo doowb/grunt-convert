@@ -1,10 +1,33 @@
+v0.1.9:
+  date: 2013-12-14
+  changes:
+    - Fix json to yml converter
+    - Add `type` option to define content with unknown extension
+
+v0.1.8:
+  date: 2013-12-18
+  changes:
+    - adding missing write file statement when converting xml to json
+
+v0.1.7:
+  date: 2013-12-12
+  changes:
+    - Fix async issues
+
+v0.1.6:
+  date: 2013-12-02
+  changes:
+    - Add support for Grunt 0.4.2
+    - Use external library
+    - Fix missing "Release History"
+
 v0.1.5:
-  date: 2013-07-16
+  date: 2013-09-10
   changes:
     - Add support for JSON to CSV.
 
 v0.1.4:
-  date: 2013-07-16
+  date: 2013-09-10
   changes:
     - Add support for CSV to JSON.
 
