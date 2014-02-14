@@ -17,7 +17,7 @@
   var fs = require('fs');
   var async = require('async');
 
-  grunt.registerMultiTask('convert', 'Build the i18n dictionaries from the csv file', function() {
+  grunt.registerMultiTask('convert', 'Convert to or from JSON, YAML, XML, PLIST or CSV', function() {
 
     //Tell grunt that this is an async task
     var done = this.async();
