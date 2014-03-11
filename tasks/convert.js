@@ -33,6 +33,10 @@
       }
     });
 
+    if (options.type && options.type.indexOf('.') === -1) {
+      options.type = '.' + options.type;
+    }
+
     grunt.verbose.writeflags(options, 'Options');
 
     async.forEach(this.files, function (f, next) {
@@ -51,10 +55,6 @@
         grunt.log.warn('Destination not written because no source files were found.');
         next();
         return;
-      }
-
-      if (options.type) {
-        options.type = '.' + options.type;
       }
 
       var srcFiles = f.src.map(grunt.file.read).join(grunt.util.normalizelf(grunt.util.linefeed)),

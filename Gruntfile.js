@@ -32,8 +32,15 @@ module.exports = function(grunt) {
         options: {
           type: 'xml'
         },
-        src: ['test/fixtures/xml-content.xyz'],
-        dest: 'tmp/result/xml-content.json'
+        files: [
+          {
+            expand: true,
+            cwd: 'test/fixtures/custom/',
+            src: ['*.*'],
+            dest: 'tmp/result/custom/',
+            ext: '.json'
+          }
+        ]
       },
       adv: {
         options: {
