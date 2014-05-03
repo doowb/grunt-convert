@@ -90,6 +90,9 @@
         handled = true;
         var parse = require('xml2js').parseString;
         parse(srcFiles, options, function(err, result) {
+          if (err) {
+            grunt.fail.warn('File ' + f.dest.cyan + ' parsing errors: ' + err);
+          }
           data = JSON.stringify(result, null, options.indent);
           grunt.file.write(f.dest, data);
           finish();
