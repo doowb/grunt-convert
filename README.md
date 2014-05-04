@@ -1,9 +1,8 @@
-# grunt-convert [![NPM version](https://badge.fury.io/js/grunt-convert.png)](http://badge.fury.io/js/grunt-convert)  [![Build Status](https://travis-ci.org/assemble/grunt-convert.png)](https://travis-ci.org/assemble/grunt-convert)
+# grunt-convert [![NPM version](https://badge.fury.io/js/grunt-convert.png)](http://badge.fury.io/js/grunt-convert)   [![Build Status](https://travis-ci.org/assemble/grunt-convert.png)](https://travis-ci.org/assemble/grunt-convert) 
 
 > Convert between XML, JSON and YAML, from one format to another.
 
 ## Getting Started
-
 _If you haven't used [grunt][] before, be sure to check out the [Getting Started][] guide._
 
 From the same directory as your project's [Gruntfile][Getting Started] and [package.json][], install this plugin with the following command:
@@ -23,7 +22,6 @@ If the plugin has been installed correctly, running `grunt --help` at the comman
 [grunt]: http://gruntjs.com/
 [Getting Started]: https://github.com/gruntjs/grunt/blob/devel/docs/getting_started.md
 [package.json]: https://npmjs.org/doc/json.html
-
 
 ## Options
 
@@ -67,7 +65,6 @@ List of fields or true if autodiscovered in the first CSV line.
 
 See [node-csv](https://github.com/wdavidw/node-csv/blob/master/doc/from.md#from.options) for other available options.
 
-
 ## Usage Examples
 
 
@@ -86,7 +83,6 @@ grunt.initConfig({
   }
 });
 ```
-
 
 
 ### Convert JSON to XML
@@ -131,6 +127,44 @@ grunt.initConfig({
 });
 ```
 
+### Convert XML to YAML
+
+```js
+grunt.initConfig({
+  convert: {
+    options: {
+      explicitArray: false,
+    },
+    xml2yml: {
+      src: ['convert.xml'],
+      dest: 'dist/convert.yml'
+    }
+  }
+});
+```
+
+### Convert XML to JSON
+
+```js
+grunt.initConfig({
+  convert: {
+    options: {
+      explicitArray: false,
+    },
+	xml2json: {
+		files: [
+		  {
+		    expand: true,
+		    cwd: 'test/fixtures/',
+		    src: ['**/*.xml'],
+		    dest: 'tmp/result/',
+		    ext: '.json'
+		  }
+		]
+	},
+  }
+});
+```
 
 ### Convert PLIST to JSON
 
@@ -173,78 +207,41 @@ grunt.initConfig({
 ```
 
 
-
-### Convert XML to YAML
-
-```js
-grunt.initConfig({
-  convert: {
-    options: {
-      explicitArray: false,
-    },
-    xml2yml: {
-      src: ['convert.xml'],
-      dest: 'dist/convert.yml'
-    }
-  }
-});
-```
-
-### Convert XML to JSON
-
-```js
-grunt.initConfig({
-  convert: {
-    options: {
-      explicitArray: false,
-    },
-	xml2json: {
-		files: [
-		  {
-		    expand: true,
-		    cwd: 'test/fixtures/',
-		    src: ['**/*.xml'],
-		    dest: 'tmp/result/',
-		    ext: '.json'
-		  }
-		]
-	},
-  }
-});
-```
-
-
 ## Contributing
 
-Please see the [Contributing to Assemble](http://assemble.io/contributing) guide for information on contributing to this project.
+We welcome all kinds of contributions! The most basic way to show your support is to star the project, and if you'd like to get involved please see the [Contributing to grunt-convert](http://assemble.io/contributing/) guide for information on contributing to this project.
 
-## Authors
+## Changes
+**DATE**       **VERSION**   **CHANGES**                                                               
+* 2014-05-03   v0.1.11       Fix (empty string), xml2js (only invoke parseString callback once),XML    
+                             parser error display a warning and abort Grunt immediately                
+* 2014-03-11   v0.1.10       Fixing options.type issue and adding more tests around it                 
+* 2013-12-14   v0.1.9        Fix json to yml converter,Add `type` option to define content with unknown
+                             extension                                                                 
+* 2013-12-18   v0.1.8        adding missing write file statement when converting xml to json           
+* 2013-12-12   v0.1.7        Fix async issues                                                          
+* 2013-12-02   v0.1.6        Add support for Grunt 0.4.2,Use external library,Fix missing "Release     
+                             History"                                                                  
+* 2013-09-10   v0.1.5        Add support for JSON to CSV.                                              
+* 2013-09-10   v0.1.4        Add support for CSV to JSON.                                              
+* 2013-07-16   v0.1.3        JSON/YAML to XML.                                                         
+* 2013-07-15   v0.1.2        Add support YAML. Added XML to JSON/YAML, JSON to YAML, and YAML to JSON. 
+* 2013-07-02   v0.1.1        XML to JSON.                                                              
+
+## Author
 
 **Jon Schlinkert**
 
-+ [http://twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)
-+ [http://github.com/jonschlinkert](http://github.com/jonschlinkert)
++ [github/jonschlinkert](https://github.com/jonschlinkert)
++ [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
 
 **Hariadi Hinta**
 
-+ [http://twitter.com/hariadi](http://twitter.com/hariadi)
-+ [http://github.com/hariadi](http://github.com/hariadi)
-
-## Release History
-
- * 2013-12-14   v0.1.9   Fix json to yml converter Add `type` option to define content with unknown extension
- * 2013-12-18   v0.1.8   adding missing write file statement when converting xml to json
- * 2013-12-12   v0.1.7   Fix async issues
- * 2013-12-02   v0.1.6   Add support for Grunt 0.4.2 Use external library Fix missing "Release History"
- * 2013-09-10   v0.1.5   Add support for JSON to CSV.
- * 2013-09-10   v0.1.4   Add support for CSV to JSON.
- * 2013-07-16   v0.1.3   JSON/YAML to XML.
- * 2013-07-15   v0.1.2   Add support YAML. Added XML to JSON/YAML, JSON to YAML, and YAML to JSON.
- * 2013-07-02   v0.1.1   XML to JSON.
++ [github.com/assemble](https://github.com/assemble)
++ [twitter.com/assemble](http://twitter.com/assemble)
 
 ## License
-[MIT License](LICENSE-MIT)
+Copyright (c) 2014 Jon Schlinkert, contributors.  
+Released under the MIT license
 
-***
-
-_This file was generated by [grunt-readme](https://github.com/assemble/grunt-readme) on Tuesday, March 11, 2014._
+_This file was generated by [grunt-verb](https://github.com/assemble/grunt-verb) on May 04, 2014._
