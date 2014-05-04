@@ -1,3 +1,14 @@
+v0.1.11:
+  date: 2014-05-03
+  changes:
+    - Fix (empty string), xml2js (only invoke parseString callback once)
+    - XML parser error display a warning and abort Grunt immediately
+
+v0.1.10:
+  date: 2014-03-11
+  changes:
+    - Fixing options.type issue and adding more tests around it
+
 v0.1.9:
   date: 2013-12-14
   changes:

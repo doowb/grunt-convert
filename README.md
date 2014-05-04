@@ -213,6 +213,9 @@ We welcome all kinds of contributions! The most basic way to show your support i
 
 ## Changes
 **DATE**       **VERSION**   **CHANGES**                                                               
+* 2014-05-03   v0.1.11       Fix (empty string), xml2js (only invoke parseString callback once),XML    
+                             parser error display a warning and abort Grunt immediately                
+* 2014-03-11   v0.1.10       Fixing options.type issue and adding more tests around it                 
 * 2013-12-14   v0.1.9        Fix json to yml converter,Add `type` option to define content with unknown
                              extension                                                                 
 * 2013-12-18   v0.1.8        adding missing write file statement when converting xml to json           
