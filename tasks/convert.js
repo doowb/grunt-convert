@@ -99,7 +99,7 @@
           next();
         });
 
-      } else if (srcExt === '.yml') {
+      } else if (srcExt === '.yml' || srcExt === '.yaml') {
 
         data = JSON.stringify(YAML.load(f.src[0]), null, options.indent);
 
@@ -130,7 +130,7 @@
         data = toXML(JSON.parse(data), options.xml);
         data = (options.pretty) ? require('pretty-data').pd.xml(data) : data; 
 
-      } else if (destExt === '.yml') {
+      } else if (destExt === '.yml' || destExt === '.yaml') {
 
         data = YAML.stringify(JSON.parse(data), options.inline, options.indent);
         grunt.file.write(f.dest, data);
