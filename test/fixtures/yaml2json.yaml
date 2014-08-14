@@ -1,0 +1,5 @@
+'sdk:source':
+  'sdk:revision': ['2']
+  'sdk:api-level': ['15']
+  'sdk:archives': [{ 'sdk:archive': [{ $: { arch: any, os: any }, 'sdk:size': ['16468746'], 'sdk:checksum': [{ _: e5992a5747c9590783fbbdd700337bf0c9f6b1fa, $: { type: sha1 } }], 'sdk:url': [sources-15_r02.zip] }] }]
+  'sdk:uses-license': [{ $: { ref: android-sdk-license } }]
