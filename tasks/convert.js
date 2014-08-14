@@ -67,9 +67,9 @@
         next();
         return;
       }
-      
+
       if (srcExt === '.csv') {
-        
+
         if (destExt === '.json') {
           handled = true;
           csv()
@@ -82,7 +82,7 @@
           });
         } else {
           grunt.log.warn('CSV to XML or YAML converter not supported yet. Please use csv2json output to convert to XML or YAML. Sorry.');
-          return;          
+          return;
         }
 
       } else if (srcExt === '.xml') {
@@ -128,7 +128,7 @@
         options.xml.header = options.header ? options.header : options.xml.header;
 
         data = toXML(JSON.parse(data), options.xml);
-        data = (options.pretty) ? require('pretty-data').pd.xml(data) : data; 
+        data = (options.pretty) ? require('pretty-data').pd.xml(data) : data;
 
       } else if (destExt === '.yml' || destExt === '.yaml') {
 
@@ -158,7 +158,7 @@
           },
           result = options.header ? '<?xml version="1.0" encoding="UTF-8"?>' : '',
           type = json.constructor.name;
-      
+
       options.header = false;
 
       if(type==='Array'){
@@ -191,7 +191,7 @@
         return json.toString()
         .replace(/([&"<>''])/g, function(str, item) {
           return XML_CHARACTER_MAP[item];
-        });  
+        });
       }
 
       return result;
