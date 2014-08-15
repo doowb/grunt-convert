@@ -105,7 +105,7 @@
 
       } else if (srcExt === '.plist') {
 
-        data = JSON.stringify(plist.parseFileSync(f.src[0]), null, options.indent);
+        data = JSON.stringify(plist.parse(grunt.file.read(f.src[0])), null, options.indent);
 
       }
 
