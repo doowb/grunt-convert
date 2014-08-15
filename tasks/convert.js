@@ -1,8 +1,8 @@
 /*
- * grunt-convert-xml
- * https://github.com/jonschlinkert/grunt-convert-xml
+ * grunt-convert
+ * https://github.com/assemble/grunt-convert
  *
- * Copyright (c) 2013 Jon Schlinkert
+ * Copyright (c) 2014, Jon Schlinkert, contributors.
  * Licensed under the MIT license.
  */
 'use strict';
