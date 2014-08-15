@@ -72,6 +72,17 @@ module.exports = function(grunt) {
           }
         ]
       },
+      yaml2json: {
+        files: [
+          {
+            expand: true,           // Enable dynamic expansion.
+            cwd: 'test/fixtures/',  // Src matches are relative to this path.
+            src: ['**/*.yaml'],      // Actual pattern(s) to match.
+            dest: 'tmp/result/',    // Destination path prefix.
+            ext: '.json'
+          }
+        ]
+      },
       json2yml: {
         files: [
           {
@@ -80,6 +91,17 @@ module.exports = function(grunt) {
             src: ['**/*.json'],
             dest: 'tmp/result/',
             ext: '.yml'
+          }
+        ]
+      },
+      json2yaml: {
+        files: [
+          {
+            expand: true,
+            cwd: 'test/fixtures/',
+            src: ['**/*.json'],
+            dest: 'tmp/result/',
+            ext: '.yaml'
           }
         ]
       },
