@@ -101,7 +101,12 @@
 
       } else if (srcExt === '.yml' || srcExt === '.yaml') {
 
-        data = JSON.stringify(YAML.load(f.src[0]), null, options.indent);
+        try {
+          data = JSON.stringify(YAML.load(f.src[0]), null, options.indent);
+        }
+        catch (e) {
+          grunt.fail.warn('File ' + f.dest.cyan + ' parsing error: ' + e.message);
+        }
 
       } else if (srcExt === '.plist') {
 
